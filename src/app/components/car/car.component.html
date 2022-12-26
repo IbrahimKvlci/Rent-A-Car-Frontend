@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-md-3">
+        <app-brand></app-brand>
+        <app-color></app-color>
+    </div>
+    <div class="col-md-9">
+        <div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="mb-3">
+            <label for="filterText" class="form-label">Search Car :</label>
+            <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Search" style="width: 30%; display:inline-block;">
+            <div style="width:40%; float:right;">
+                <select class="form-select" aria-label="Default select example" style="display:inline-block; width:30%" [(ngModel)]="currentColorId">
+                    <option value="0" selected>Colors</option>
+                    <option *ngFor="let color of colors" [value]="color.id">{{color.name}}</option>
+                </select>
+                <select class="form-select" aria-label="Default select example" style="display:inline-block; width:30%" [(ngModel)]="currentBrandId">
+                    <option value="0" selected>Brands</option>
+                    <option *ngFor="let brand of brands" [value]="brand.id">{{brand.name}}</option>
+                </select>
+                <button (click)="getCarsByFilter(currentBrandId,currentColorId)" type="button" class="btn btn-warning">Filter</button>
+            </div>
+            
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div *ngFor="let car of cars | filterPipe:filterText:currentColorName" class="col">
+                <div class="card h-100" *ngIf="validReturnDateOfCar(car.id)">
+                    <img [src]="getCarImages(car)" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{car.brandName}} {{car.modelName}} {{car.colorName}} {{car.modelYear}}</h5>
+                        <p style="-webkit-line-clamp: 5; line-clamp: 2; -webkit-box-orient: vertical; display: -webkit-box; overflow:hidden; text-overflow: ellipsis;" class="card-text">{{car.description}}</p>
+                        <a routerLink="/rental/{{car.id}}" class="btn btn-primary">Rent ${{car.dailyPrice}}</a>
+                    </div>
+                    <div class="card-footer">
+                        <a routerLink="/admin/cars/update/{{car.id}}" class="btn btn-primary">Update</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

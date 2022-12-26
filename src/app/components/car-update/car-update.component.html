@@ -1,0 +1,54 @@
+<div class="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header"><h5 class="title">Update Car</h5></div>
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md" *ngFor="let imagePath of imagesPath">
+                            <img style="max-width: 300px; max-height: 300px; margin:10px;" src="{{imagePath}}" class="img-thumbnail" alt="...">
+                        </div>
+                        <div class="col-md">
+                            <input (change)="onChange($event)" style="max-width: 100px; max-height: 100px; margin:10px; background:url(assets/addCarImage.jpg)" type="file" src="assets/addCarImage.jpg" class="img-thumbnail">
+                        </div>
+                    </div>
+                </div>
+                <form  [formGroup]="carUpdateForm" >
+                    <div class="mb-3" >
+                        <label for="brandSelect" class="form-label">Brand</label>
+                        <select formControlName="brandId" id="brandSelect" class="form-select">
+                            <option *ngFor="let brand of brands" [ngValue]="brand.id">{{brand.name}}</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="colorSelect" class="form-label">Color</label>
+                        <select formControlName="colorId" id="colorSelect" class="form-select" aria-label="Default select example">
+                            <option value="" selected>Open this select menu</option>
+                            <option *ngFor="let color of colors" [value]="color.id">{{color.name}}</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modelName" class="form-label">Model Name</label>
+                        <input type="text" class="form-control" id="modelName" formControlName="modelName" placeholder="Model name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="modelYear" class="form-label">Model Year</label>
+                        <input type="number" class="form-control" id="modelYear" formControlName="modelYear" placeholder="Model year">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dailyPrice" class="form-label">Daily Price</label>
+                        <input type="number" class="form-control" id="dailyPrice" formControlName="dailyPrice" placeholder="Daily Price">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="text" class="form-control" id="description" formControlName="description" placeholder="Description">
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-fill btn-primary" (click)="update()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+

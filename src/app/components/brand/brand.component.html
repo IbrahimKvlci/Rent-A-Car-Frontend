@@ -1,0 +1,13 @@
+<div class="badge bg-primary text-wrap" style="width: 100%; height: 30px; margin-top:10px;" >
+    <p style="font-size: 20px;">Brands</p>
+</div>
+<div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
+<ul *ngIf="dataLoaded==true" class="list-group">
+    <li (click)="setCurrentNull()" [class]="setAllBrandClass()" routerLink="/cars">All</li>
+    <li  *ngFor="let brand of brands" >
+        <h4 [class]="getCurrentBrandClass(brand)" (click)="setCurrentBrand(brand)" routerLink="/brands/{{brand.id}}">{{brand.name}}</h4>
+        <a routerLink="/admin/brands/update/{{brand.id}}" class="btn btn-primary">Update</a>
+    </li>
+</ul>

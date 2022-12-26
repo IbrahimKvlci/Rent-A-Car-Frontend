@@ -1,0 +1,37 @@
+<div class="content" *ngIf="carDetails">
+  <div class="col-md-12">
+    <div class="d-flex justify-content-center container mt-5">
+        <div class="card p-3 bg-white"><i class="fa fa-apple"></i>
+            <div class="about-product text-center mt-2">
+                <div class="row">
+                    <div class="col-md" *ngFor="let imagePath of imagePaths">
+                        <img class="image" src="{{imagePath}}" width="300">
+                    </div>
+                </div>
+                
+                
+                <div>
+                    <h4>{{carDetails.brandName}} {{carDetails.modelName}} {{carDetails.colorName}}</h4>
+                    <h6 class="mt-0 text-black-50">{{carDetails.modelYear}}</h6>
+                    <h6 class="mt-0 text-black-50">{{carDetails.description}}</h6>
+                </div>
+            </div>
+            <div class="stats mt-2">
+                <div class="d-flex justify-content-between p-price"><span>Daily Price</span><span>{{carDetails.dailyPrice|currency:"USD"}}</span></div>
+                <div class="date">
+                    <div class="d-flex justify-content-between p-price"><span>Choose Start Date</span><span><input (change)="calculateTotalPrice()"  [(ngModel)]="startDate" type="datetime-local"></span></div>
+                    <div class="d-flex justify-content-between p-price"><span>Choose Return Date</span><span><input (change)="calculateTotalPrice()" [(ngModel)]="endDate" type="datetime-local"></span></div>
+                    
+                </div>
+            </div>
+            <div class="d-flex justify-content-between total font-weight-bold mt-4"><span>Total</span><span *ngIf="totalDay && totalDay>0">{{totalDay*carDetails.dailyPrice|currency:"USD"}}</span></div>
+            <div class="buttons">
+                <button type="button" class="btn btn-danger">Cancel</button>
+                <button (click)="rentNow()" type="button" class="btn btn-success">Rent Now</button>
+
+            </div>
+            
+        </div>
+    </div>
+  </div>
+</div>

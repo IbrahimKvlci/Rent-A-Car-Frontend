@@ -1,0 +1,13 @@
+<div class="badge bg-primary text-wrap" style="width: 100%; height: 30px; margin-top:10px;" >
+    <p style="font-size: 20px;">Colors</p>
+</div>
+<div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
+<ul *ngIf="dataLoaded==true" class="list-group">
+    <li [class]="setAllColorClass()" (click)="setCurrentNull()" routerLink="cars/">All</li>
+    <li  *ngFor="let color of colors">
+        <h4 [class]="setCurrentColorClass(color)" (click)="setCurrentColor(color)" routerLink="/colors/{{color.id}}">{{color.name}}</h4>
+        <a routerLink="/admin/colors/update/{{color.id}}" class="btn btn-primary">Update</a>
+    </li>
+</ul>

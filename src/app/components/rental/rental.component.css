@@ -1,0 +1,18 @@
+.card {
+  width: 700px;
+}
+
+body {
+  background: #eee;
+}
+
+.image{
+    margin: 5px;
+}
+
+.btn{
+    width: 100px;
+    float: right;
+    margin: 5px;
+}
+
